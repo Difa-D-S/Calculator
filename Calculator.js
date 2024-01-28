@@ -1,19 +1,27 @@
-let outputScreen = document.getElementById("outputScreen");
+let inp = document.getElementById('input');
+let btn=document.querySelectorAll('.button');
+let string="";
+        
+let array = Array.from(btn);
 
-        function display(num){
-            outputScreen.value +=num;
+array.forEach(button => {
+    button.addEventListener('click', e => {
+
+        if(e.target.innerHTML =="=") {
+        string = eval(string);
+        inp.value = string;
+        } 
+        else if(e.target.innerHTML == "C"){
+            string = "";
+            inp.value = string;
         }
-        function Calculate(){
-            try{
-                outputScreen.value = eval(outputScreen.value);
-            }
-            catch(err){
-                alert("Invalid");
-            }
+        else if(e.target.innerHTML == "DEL"){
+            string = string.substring(0,string.length-1);
+            inp.value = string;
         }
-        function Clear(){
-            outputScreen.value = "";
+        else{
+            string=string+e.target.innerHTML;
+            inp.value = string;
         }
-        function del(){
-            outputScreen.value = outputScreen.value.slice(0,-1);
-        }
+    })
+})
